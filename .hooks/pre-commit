@@ -1,0 +1,27 @@
+#!/bin/bash
+
+terraform fmt -recursive
+
+all_files=$(git ls-files)
+
+is_text_file() {
+  if file "$1" | grep -q 'text'; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+for file in $all_files; do
+  if [ -f "$file" ]; then
+    if is_text_file "$file"; then
+      last_char=$(tail -c 1 "$file")
+      if [ "$last_char" != "" ] && [ "$last_char" != $'\n' ]; then
+        echo "Added new line: $file"
+        echo "" >> "$file"
+      fi
+    fi
+  fi
+done
+
+git update-index --again
