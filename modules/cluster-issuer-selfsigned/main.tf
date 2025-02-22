@@ -17,7 +17,7 @@ resource "kubectl_manifest" "cluster_issuer" {
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: ${var.cluster_issuer_name}
+  name: ${var.name}
 spec:
   ca:
     secretName: ${var.secret_name}

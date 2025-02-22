@@ -1,4 +1,4 @@
-output "cluster_issuer_name" {
-  description = "The name of the ClusterIssuer"
+output "name" {
+  description = "The name of the self-signed ClusterIssuer"
   value       = kubectl_manifest.cluster_issuer.name
 }

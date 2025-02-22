@@ -22,3 +22,8 @@ variable "namespace" {
   type    = string
   default = "ingress-nginx"
 }
+
+variable "class_name" {
+  type    = string
+  default = "nginx"
+}

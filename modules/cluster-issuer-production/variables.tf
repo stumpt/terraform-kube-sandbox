@@ -1,11 +1,12 @@
+variable "name" {
+  type        = string
+  description = "The name of the ClusterIssuer"
+  default     = "issuer-production"
+}
+
 variable "namespace" {
   type    = string
   default = "cert-manager"
-}
-variable "cluster_issuer_name" {
-  type        = string
-  description = "The name of the ClusterIssuer"
-  default     = "letsencrypt"
 }
 
 variable "acme_email" {
@@ -26,7 +27,7 @@ variable "secret_name" {
   default     = "letsencrypt-private-key"
 }
 
-variable "ingress_class" {
+variable "ingress_class_name" {
   type        = string
   description = "Ingress class used for HTTP-01 Challenge"
   default     = "nginx"

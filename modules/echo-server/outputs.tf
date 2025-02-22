@@ -1,4 +1,4 @@
 output "echo_server_ingress_url" {
   description = "Echo Server Url"
-  value       = "https://${local.hostname}"
+  value       = "https://${var.hostname}"
 }

@@ -5,4 +5,8 @@ resource "helm_release" "ingress_nginx" {
   namespace        = var.namespace
   version          = var.chart_version
   create_namespace = true
+  set {
+    name  = "controller.ingressClassResource.name"
+    value = var.class_name
+  }
 }

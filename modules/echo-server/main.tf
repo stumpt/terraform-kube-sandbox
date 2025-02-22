@@ -63,11 +63,11 @@ resource "kubernetes_ingress_v1" "echo" {
   spec {
     ingress_class_name = var.ingress_class_name
     tls {
-      hosts       = [local.hostname]
+      hosts       = [var.hostname]
       secret_name = local.secret_name
     }
     rule {
-      host = local.hostname
+      host = var.hostname
       http {
         path {
           path      = "/"

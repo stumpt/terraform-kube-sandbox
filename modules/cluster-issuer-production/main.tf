@@ -3,7 +3,7 @@ resource "kubectl_manifest" "cluster_issuer" {
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: ${var.cluster_issuer_name}
+  name: ${var.name}
 spec:
   acme:
     email: "${var.acme_email}"
@@ -13,6 +13,6 @@ spec:
     solvers:
       - http01:
           ingress:
-            class: "${var.ingress_class}"
+            class: "${var.ingress_class_name}"
 YAML
 }

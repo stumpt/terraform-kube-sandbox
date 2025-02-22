@@ -23,18 +23,18 @@ variable "ingress_class_name" {
   default = "nginx"
 }
 
-variable "root_domain" {
-  type    = string
-  default = "cluster.local"
-}
-
 variable "issuer_name" {
   type        = string
   description = "The name of the ClusterIssuer to use for TLS"
 }
 
+variable "hostname" {
+  type        = string
+  description = "echo.cluster.local"
+}
+
 locals {
-  hostname    = "${var.name}.${var.root_domain}"
   secret_name = "${var.name}-tls"
   image       = "ealen/echo-server:${var.image_tag}"
 }
+
