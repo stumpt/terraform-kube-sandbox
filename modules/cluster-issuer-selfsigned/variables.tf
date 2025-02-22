@@ -9,14 +9,16 @@ variable "namespace" {
   default = "cert-manager"
 }
 
-variable "ca_cert_path" {
+variable "ca_cert" {
   type        = string
-  description = "Path to mkcert CA certificate"
+  sensitive   = true
+  description = "ca_cert_selfsigned"
 }
 
-variable "ca_key_path" {
+variable "ca_key" {
   type        = string
-  description = "Path to mkcert CA key"
+  sensitive   = true
+  description = "ca_cert_selfsigned"
 }
 
 variable "cluster_issuer_name" {

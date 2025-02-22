@@ -33,7 +33,6 @@ resource "kubernetes_deployment" "echo" {
       }
     }
   }
-  depends_on = [kubernetes_namespace.echo]
 }
 
 resource "kubernetes_service" "echo" {
@@ -51,7 +50,6 @@ resource "kubernetes_service" "echo" {
       target_port = 80
     }
   }
-  depends_on = [kubernetes_deployment.echo]
 }
 
 resource "kubernetes_ingress_v1" "echo" {
@@ -86,5 +84,4 @@ resource "kubernetes_ingress_v1" "echo" {
       }
     }
   }
-  depends_on = [kubernetes_service.echo]
 }

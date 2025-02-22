@@ -1,6 +1,6 @@
 variable "name" {
   type    = string
-  default = "grafana"
+  default = "echo"
 }
 
 variable "image_tag" {
@@ -10,7 +10,7 @@ variable "image_tag" {
 
 variable "namespace" {
   type    = string
-  default = "monitoring"
+  default = "demo"
 }
 
 variable "replicas" {
@@ -23,13 +23,18 @@ variable "ingress_class_name" {
   default = "nginx"
 }
 
+variable "root_domain" {
+  type    = string
+  default = "cluster.local"
+}
+
 variable "issuer_name" {
   type        = string
   description = "The name of the ClusterIssuer to use for TLS"
 }
 
 locals {
-  hostname    = "${var.name}.127.0.0.1.nip.io"
+  hostname    = "${var.name}.${var.root_domain}"
   secret_name = "${var.name}-tls"
   image       = "ealen/echo-server:${var.image_tag}"
 }

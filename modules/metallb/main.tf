@@ -8,6 +8,7 @@ resource "helm_release" "metallb" {
 }
 
 resource "kubectl_manifest" "metallb_ip_pool" {
+  for_each  = toset(var.ip_range)
   yaml_body = <<YAML
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -16,22 +17,19 @@ metadata:
   namespace: ${var.namespace}
 spec:
   addresses:
-    %{for ip in var.ip_range~}
-    - ${ip}
-    %{endfor~}
+    - ${each.value}
 YAML
 
   depends_on = [helm_release.metallb]
 }
 
 resource "kubectl_manifest" "metallb_l2_advertisement" {
-  yaml_body = <<YAML
+  yaml_body  = <<YAML
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: advert
   namespace: ${var.namespace}
 YAML
-
   depends_on = [kubectl_manifest.metallb_ip_pool]
 }

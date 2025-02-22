@@ -5,8 +5,8 @@ resource "kubernetes_secret" "ca" {
   }
 
   data = {
-    "tls.crt" = file("${var.ca_cert_path}")
-    "tls.key" = file("${var.ca_key_path}")
+    "tls.crt" = base64decode(var.ca_cert)
+    "tls.key" = base64decode(var.ca_key)
   }
 
   type = "kubernetes.io/tls"

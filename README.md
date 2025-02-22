@@ -34,21 +34,19 @@ For local usage, for example, in Docker Desktop you might want to use selfsigned
 ```sh
 brew install mkcert
 mkcert -install
-
-# Get Path to rootCA cert. Later you have to set in terraform.tfvars: cluster_issuer_selfsigned_ca_cert_path
-$ echo $(mkcert -CAROOT)/rootCA.pem 
-/Users/nicosha/Library/Application Support/mkcert/rootCA.pem
-
-# Get path to rootCA key. Later you have to set in terraform.tfvars: cluster_issuer_selfsigned_ca_key_path
-echo $(mkcert -CAROOT)/rootCA-key.pem 
-/Users/nicosha/Library/Application Support/mkcert/rootCA-key.pem
 ```
 
 ## 🛠️ Setup and Deployment
-1. **Fork the repo**
+1. **Set selfsigned CA certificate and key**
+   For local usage you have set some TF_VAR
+   ```sh
+   export TF_VAR_cluster_issuer_selfsigned_ca_cert="$(base64 < "$(mkcert -CAROOT)/rootCA.pem")"
+   export TF_VAR_cluster_issuer_selfsigned_ca_key="$(base64 < "$(mkcert -CAROOT)/rootCA-key.pem")"
+   ```
 
 2. **Customizing Variables:**
-You can override default variables by creating a `envs/local/terraform.tfvars` file or passing them via CLI:
+
+   You can override default variables by creating a `envs/local/terraform.tfvars` file or passing them via CLI:
    ```hcl
    kube_config_path = "~/.kube/config"
    kube_context     = "docker-desktop"
@@ -56,10 +54,6 @@ You can override default variables by creating a `envs/local/terraform.tfvars` f
    echo_namespace   = "demo"
    echo_replicas    = 3
    metallb_ip_range = ["127.0.0.1-127.0.0.1"]
-   # echo $(mkcert -CAROOT)/rootCA.pem 
-   cluster_issuer_selfsigned_ca_cert_path = "/Users/nicosha/Library/Application Support/mkcert/rootCA.pem"
-   # echo $(mkcert -CAROOT)/rootCA.pem 
-   cluster_issuer_selfsigned_ca_key_path = "/Users/nicosha/Library/Application Support/mkcert/rootCA-key.pem"
    cluster_issuer_production_acme_email = "my-issuer-email@gmail.com"
    ```
 
@@ -76,6 +70,8 @@ You can override default variables by creating a `envs/local/terraform.tfvars` f
 5. **Apply the changes:**
    ```sh
    make tf-apply
+   # or you can use -auto-approve option
+   make tf-apply-approve
    ```
 
 6. **Verify resources in Kubernetes:**
@@ -94,6 +90,8 @@ You can override default variables by creating a `envs/local/terraform.tfvars` f
 To remove all deployed resources:
 ```sh
 make tf-destroy
+# or you can use -auto-approve option
+make tf-destroy-approve
 ```
 
 ### **Recreate Infrastructure**
