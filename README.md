@@ -113,6 +113,18 @@ brew install graphviz
 make tf-graph
 ```
 
+## **Terraform Git Hooks**
+You can install pre-commit hooks from .hooks folder for autoformatting files:
+```sh
+make setup-hooks
+```
+
+## **Terraform Tests**
+You can run basic validation for your Terraform configuration:
+```sh
+make tf-test
+```
+
 ## 📌 Key Features
 ✅ Modular architecture with separate Terraform modules.  
 ✅ Uses Helm for package management.  

@@ -59,3 +59,8 @@ tf-reset:
 	$(MAKE) tf-clean-cache-and-state; \
 	$(MAKE) tf-init; \
 	$(MAKE) tf-apply-approve;
+
+tf-test:
+	cd $(TF_DIR); terraform init -backend=false; \
+	terraform validate; \
+	terraform fmt -check=true;
