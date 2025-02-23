@@ -2,6 +2,8 @@
 
 # 🚀 Terraform Kubernetes — Starter Kit for Docker Desktop
 
+![alt text](image-1.png)
+
 ## 📂 Project Structure
 This Terraform project is designed to deploy and manage a Kubernetes cluster with essential services such as MetalLB, Cert-Manager, Ingress-Nginx, and Echo Server. The structure follows best practices for modularity and maintainability.
 
