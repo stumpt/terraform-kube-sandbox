@@ -1,3 +1,5 @@
+[![Terraform Apply](https://github.com/itcaat/terraform-kubernetes-desktop-startkit/actions/workflows/k8s.yml/badge.svg)](https://github.com/itcaat/terraform-kubernetes-desktop-startkit/actions/workflows/k8s.yml)
+
 # 🚀 Terraform Kubernetes — Starter Kit for Docker Desktop
 
 ## 📂 Project Structure
