@@ -2,10 +2,16 @@
 
 # 🚀 Terraform Kubernetes — Starter Kit for Docker Desktop
 
+This starter kit is designed for local Kubernetes experimentation using Terraform. It provides a preconfigured setup with certificate management, ingress routing, and load balancing, making it easy to test, learn, and prototype cloud-native deployments.
+
 ![alt text](image-1.png)
 
+## 👨‍💻 Who is it for?
+- DevOps Engineers & SREs who want a sandbox for testing infrastructure automation.
+- Developers exploring Kubernetes deployments without cloud costs.
+- Teams learning Terraform and Kubernetes best practices in a safe, local environment.
+
 ## 📂 Project Structure
-This Terraform project is designed to deploy and manage a Kubernetes cluster with essential services such as MetalLB, Cert-Manager, Ingress-Nginx, and Echo Server. The structure follows best practices for modularity and maintainability.
 
 ### **Environments**
 - `envs/local` - Local Environment. You can use Docker Desktop for local usage.
@@ -36,11 +42,15 @@ Each service is managed as a separate module for better reusability and organiza
 ### **Requirements**
 For local usage, for example, in Docker Desktop you might want to use selfsigned certificates. To do that process easy just install the tool `mkcert`.
 ```sh
+# https://github.com/FiloSottile/mkcert?tab=readme-ov-file#installation
 brew install mkcert
 mkcert -install
 ```
 
 ## 🛠️ Setup and Deployment
+
+The best way is fork the repo. But it's up to you.
+
 1. **Set selfsigned CA certificate and key**
    For local usage you have set some TF_VAR
    ```sh
@@ -50,15 +60,18 @@ mkcert -install
 
 2. **Customizing Variables:**
 
-   You can override default variables by creating a `envs/local/terraform.tfvars` file or passing them via CLI:
+   You can override default locals by creating a `envs/local/locals.tf` file:
    ```hcl
-   kube_config_path = "~/.kube/config"
-   kube_context     = "docker-desktop"
-   echo_name        = "echo"
-   echo_namespace   = "demo"
-   echo_replicas    = 3
-   metallb_ip_range = ["127.0.0.1-127.0.0.1"]
-   cluster_issuer_production_acme_email = "my-issuer-email@gmail.com"
+   locals {
+     kube_config_path                     = "~/.kube/config"
+     kube_context                         = "docker-desktop"
+     ingress_class_name                   = "nginx"
+     cluster_issuer_selfsigned            = "selfsigned"
+     cluster_issuer_production            = "production"
+     cluster_issuer_production_acme_email = "admin@example.com"
+     root_domain                          = "127.0.0.1.nip.io"
+     metallb_ip_range                     = ["127.0.0.1-127.0.0.1"]
+   }
    ```
 
 3. **Initialize Terraform:**
