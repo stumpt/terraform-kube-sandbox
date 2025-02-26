@@ -4,8 +4,6 @@
 
 This starter kit is designed for local Kubernetes experimentation using Terraform. It provides a preconfigured setup with certificate management, ingress routing, and load balancing, making it easy to test, learn, and prototype cloud-native deployments.
 
-![alt text](image-1.png)
-
 ## 👨‍💻 Who is it for?
 - DevOps Engineers & SREs who want a sandbox for testing infrastructure automation.
 - Developers exploring Kubernetes deployments without cloud costs.
